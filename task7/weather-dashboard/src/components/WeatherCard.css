@@ -1,0 +1,43 @@
+.weather-card {
+  background: linear-gradient(135deg, #6d869b 0%, #608284 100%);
+  color: white;
+  padding: 20px;
+  border-radius: 16px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  width: 220px;
+  margin: 15px auto;
+  transition: transform 0.2s ease-in-out;
+}
+
+.weather-card:hover {
+  transform: scale(1.05);
+}
+
+.weather-title {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.weather-temp {
+  font-size: 32px;
+  font-weight: bold;
+  margin: 10px 0;
+}
+
+.weather-icon {
+  width: 80px;
+  height: 80px;
+}
+
+.weather-desc {
+  font-size: 14px;
+  margin: 8px 0;
+  text-transform: capitalize;
+}
+
+.weather-extra {
+  margin-top: 10px;
+  font-size: 13px;
+  opacity: 0.9;
+}

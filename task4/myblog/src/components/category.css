@@ -1,0 +1,34 @@
+/* الحاوية الرئيسية للأزرار */
+.cat-title{
+    font-size: 30px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 12px;
+    color: #35393f;
+   text-shadow:1px 1px 2px #339a68;
+}
+.category-container {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+/* الأزرار */
+.category-button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 20px;
+  background-color: #e5e7eb; /* رمادي فاتح */
+  color: #333;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.category-button:hover {
+  background-color: #339a68; /* أزرق */
+  color: white;
+  transform: scale(1.05);
+}
+

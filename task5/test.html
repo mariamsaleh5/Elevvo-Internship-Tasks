@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>إدارة الطلبات</title>
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+    <!-- Google Material Icons -->
+    <!-- Google Material Icons (الرابط الصحيح) -->
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+
+    <!-- Cairo Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: "Cairo", sans-serif;
+        background: #f5f5f5;
+        padding: 20px;
+        overflow-x: hidden;
+      }
+      .card-header {
+       display: flex;
+       flex-direction: column; 
+       align-items: center;    
+       justify-content: center; 
+       text-align: center;
+       font-weight: bold;
+}
+
+      .status-container {
+        display: grid;
+        grid-template-columns: repeat(8, 1fr);
+        column-gap: 30px;
+        row-gap: 20px;
+        padding: 20px;
+      }
+
+      .status-box {
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        min-height: 250px;
+        display: flex;
+        flex-direction: column;
+        transition: all 0.3s ease;
+      }
+
+      .status-box:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+      }
+
+      .status-box .card-header {
+        margin: -20px -20px 15px -20px;
+        padding: 15px 20px;
+        border-radius: 12px 12px 0 0;
+        color: white;
+        font-size: 1.1rem;
+        font-weight: 700;
+        text-align: center;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .status-box .status-count {
+        background: rgba(255, 255, 255, 0.2);
+        padding: 4px 10px;
+        border-radius: 999px;
+        font-weight: bold;
+        font-size: 14px;
+      }
+
+      .status-box ul {
+        list-style: none;
+        padding: 0;
+        width: 100%;
+        max-height: 200px;   
+      overflow-y: auto;    
+       overflow-x: hidden;
+      }
+
+      .status-box li {
+        background: #f8f8f8;
+        margin-bottom: 10px;
+        padding: 12px;
+        border-radius: 8px;
+        font-size: 14px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .status-box select {
+        font-family: "Cairo", sans-serif;
+        font-size: 13px;
+        padding: 5px 8px;
+        border-radius: 6px;
+        border: 1px solid #d1d5db;
+        background-color: white;
+        cursor: pointer;
+      }
+
+      .date-container {
+        background: white;
+        padding: 10px 15px;
+        border-radius: 10px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        width: fit-content;
+        margin: 20px auto;
+      }
+      input[type="date"] {
+  color: black !important;   
+  background-color: white;   
+}
+
+      .date-container input[type="date"] {
+        padding: 6px 10px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        font-size: 14px;
+        cursor: pointer;
+        transition: border-color 0.3s, box-shadow 0.3s;
+      }
+
+      .date-container input[type="date"]:hover {
+        border-color: #666;
+      }
+
+      .date-container input[type="date"]:focus {
+        outline: none;
+        border-color: #007bff;
+        box-shadow: 0 0 5px rgba(0, 123, 255, 0.4);
+      }
+
+      .status-box li label {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        width: 100%;
+      }
+
+      .status-box li small {
+        color: #374151;
+        font-size: 0.85rem;
+      }
+
+      
+      /* Grid Layout */
+      .status-box:nth-of-type(1) {
+        grid-column: 1 / span 3;
+        grid-row: 1;
+      }
+
+      .status-box:nth-of-type(2) {
+        grid-column: 4 / span 5;
+        grid-row: 1;
+      }
+
+      .status-box:nth-of-type(3) {
+        grid-column: 1 / span 2;
+        grid-row: 2;
+      }
+
+      .status-box:nth-of-type(4) {
+        grid-column: 3 / span 2;
+        grid-row: 2;
+      }
+
+      .status-box:nth-of-type(5) {
+        grid-column: 5 / span 2;
+        grid-row: 2;
+      }
+
+      .status-box:nth-of-type(6) {
+        grid-column: 7 / span 2;
+        grid-row: 2;
+      }
+
+      @media (max-width: 992px) {
+        .status-container {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .status-box:nth-of-type(1),
+        .status-box:nth-of-type(2),
+        .status-box:nth-of-type(3),
+        .status-box:nth-of-type(4),
+        .status-box:nth-of-type(5),
+        .status-box:nth-of-type(6) {
+          grid-column: auto;
+          grid-row: auto;
+        }
+      }
+
+      @media (max-width: 640px) {
+        .status-container {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <h2 class="text-center fw-bold text-dark mb-4">إدارة الطلبات</h2>
+
+    <div class="date-container d-flex align-items-center gap-3">
+      <span>من</span>
+      <input type="date" id="fromDate" class="form-control w-auto text-white bg-dark" />
+      <span>الى</span>
+      <input type="date" id="toDate" class="form-control w-auto text-white bg-dark" />
+      <button class="btn btn-primary" id="filterBtn">تقرير</button>
+    </div>
+
+    <!-- Modal for Order Details -->
+    <div
+      class="modal fade"
+      id="orderDetailsModal"
+      tabindex="-1"
+      aria-labelledby="orderDetailsModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header bg-dark">
+            <h5 class="modal-title" id="orderDetailsModalLabel">
+              تفاصيل الطلب
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body bg-dark" id="details_order"></div>
+          <div class="modal-footer bg-dark">
+            <button
+              type="button"
+              class="btn btn-primary"
+              data-bs-dismiss="modal"
+            >
+              إغلاق
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="status-container" id="statusContainer"></div>
+
+    <!-- Bootstrap JS -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
+    ></script>
+
+    <script>
+      function addDaysToDate(days) {
+        // Get the current date
+        const currentDate = new Date();
+
+        // Add the specified number of days
+        currentDate.setDate(currentDate.getDate() + days);
+
+        // Extract the date part (YYYY-MM-DD)
+        const year = currentDate.getFullYear();
+        const month = String(currentDate.getMonth() + 1).padStart(2, "0");
+        const day = String(currentDate.getDate()).padStart(2, "0");
+
+        // Return the formatted date string
+        return `${year}-${month}-${day}`;
+      }
+      $("#fromDate").val(addDaysToDate(-1000)); // Default to 7 days ago
+      $("#toDate").val(addDaysToDate(0)); // Default to today
+      let orderStatuses = [];
+      let statuses = [];
+      let workers = [];
+      let deliveries = [];
+      let ordersData = [];
+      const statusColors = {
+       1: "#9951b4", 
+       2: "#f59e0b", 
+       3: "#f97316", 
+       4: "#3b82f6", 
+       5: "#14b8a6", 
+       6: "#22c55e",
+      };
+
+
+      function loadDataAndRender() {
+        let workersLoaded = false;
+        let deliveriesLoaded = false;
+        let statusesLoaded = false;
+
+        $.post(
+          "../../r/j",
+          { tb: "EC_Order_Status", tbtype: "table", cols: "*" },
+          function (data) {
+            console.log("Order Status Response:", data);
+            orderStatuses = data || [];
+
+            statuses = (orderStatuses || []).map(function (status) {
+              return {
+                key: status?.ID || "",
+                code: status?.Code || "",
+                label: status?.internal_status_name || "",
+                sort: Number(status?.Sort) || 0,
+              };
+            });
+            statuses.sort(function (a, b) {
+              return a.sort - b.sort;  
+            });
+
+    console.log("✅ statuses after sort:", statuses);
+
+            statusesLoaded = true;
+            checkAllLoaded();
+          }
+        );
+
+        $.post(
+          "../../r/j",
+          { tb: "EC_workers", tbtype: "table", cols: "*" },
+          function (data) {
+            console.log("Workers Response:", data);
+            workers = data || [];
+            workersLoaded = true;
+            checkAllLoaded();
+          }
+        );
+
+        $.post(
+          "../../r/j",
+          { tb: "EC_deliveries", tbtype: "table", cols: "*" },
+          function (data) {
+            console.log("Deliveries Response:", data);
+            deliveries = data || [];
+            deliveriesLoaded = true;
+            checkAllLoaded();
+          }
+        );
+
+        function checkAllLoaded() {
+          if (workersLoaded && deliveriesLoaded && statusesLoaded) {
+            renderBoxes();
+          }
+        }
+      }
+    setInterval(function () {
+        loadDataAndRender();
+      }, 30000);
+      
+      function renderBoxes() {
+        const container = document.getElementById("statusContainer");
+        container.innerHTML = "";
+
+        statuses.forEach((status, index) => {
+  const ordersInStatus = ordersData.filter(
+    (o) => String(o.status).trim() === String(status.key).trim()
+  );
+          const nextStatus =
+            index < statuses.length - 1 ? statuses[index + 1] : null;
+          const tooltipText = nextStatus
+            ? `نقل الطلب إلى ${nextStatus.label}`
+            : "";
+
+          const box = document.createElement("div");
+          box.className = `status-box ${status.key} card`;
+        const color = statusColors[status.code] || "#6b7280"; 
+
+          box.innerHTML = `
+             <div class="card-header" style="background: ${color} !important; color: white;">
+          
+            <div class="status-label">${status.label}</div>
+            </div>
+            <div class="card-body">
+                ${
+                  status.code === 2
+                    ? `
+                    <div class="mb-3">
+                        <label>اختر العامل:</label>
+                        <select class="form-select" id="workers">
+                            ${workers
+                              .map(
+                                (w) =>
+                                  `<option value="${w.ID}">${w.worker_name}</option>`
+                              )
+                              .join("")}
+                        </select>
+                    </div>
+                `
+                    : ""
+                }
+                ${
+                  status.code === 4
+                    ? `
+                    
+                    <div class="mb-3">
+                        <label>اختر الدليفري:</label>
+                        <select class="form-select" id="deliveries">
+                            ${deliveries
+                              .map(
+                                (d) =>
+                                  `<option value="${d.ID}">${d.delivery_name}</option>`
+                              )
+                              .join("")}
+                        </select>
+                    </div>
+                `
+                    : ""
+                }
+                 <ul class="list-group list-group-flush"  id="${
+                   status.key
+                 }-orders">
+                   
+                </ul>
+               
+            </div>
+        `;
+          let statusOrders = getOrders(status.key);
+          //loop
+
+          container.appendChild(box);
+        });
+
+        // تفعيل التولتيب
+        const tooltipTriggerList = [].slice.call(
+          document.querySelectorAll('[data-bs-toggle="tooltip"]')
+        );
+        tooltipTriggerList.forEach((el) => new bootstrap.Tooltip(el));
+      }
+
+      function showOrderDetails(element) {
+  const order = JSON.parse($(element).closest("li").attr("data-order"));
+  if (!order) return;
+
+  const div_details = document.getElementById("details_order");
+
+  div_details.innerHTML = `
+    <h5>تفاصيل الطلب رقم #${order.Order_number}</h5>
+    <p><strong>العنوان:</strong> ${order.address}</p>
+    <p><strong>تاريخ الطلب:</strong> ${new Date(order.Order_date).toLocaleDateString("ar-EG")}</p>
+    <p><strong>ملاحظات:</strong> ${order.Notes?.trim() || "لا توجد ملاحظات"}</p>
+    <p><strong>الإجمالي:</strong> ${order.total} جنيه</p>
+    <p><strong>الشحن:</strong> ${order.shipping} جنيه</p>
+    <p><strong>المدفوع:</strong> ${order.payments ?? 0} جنيه</p>
+    <p><strong>المسترد:</strong> ${order.refunded ?? 0} جنيه</p>
+    <p><strong>المتبقي:</strong> ${order.remain ?? order.total - (order.payments ?? 0)} جنيه</p>
+    <p><strong>الخصم:</strong> ${order.discount_value || 0} جنيه</p>
+  `;
+
+  // معالجة العناصر
+  let items = [];
+  if (order.items) {
+    try {
+      items = typeof order.items === "string" ? JSON.parse(order.items) : order.items;
+    } catch (e) {
+      console.warn("خطأ في parsing items:", e);
+    }
+  }
+
+  if (items.length > 0) {
+    div_details.innerHTML += `
+      <h6>العناصر:</h6>
+      <ul class="list-group list-group-flush">
+        ${items.map(item => `
+          <li class="list-group-item" style="color: white;">
+            ${item.Item_name} - الكمية: ${item.quantity} - السعر: ${item.price} جنيه
+            ${item.discount ? `(خصم: ${item.discount} جنيه)` : ""}
+          </li>
+        `).join("")}
+      </ul>
+    `;
+  }
+
+  const modal = new bootstrap.Modal(document.getElementById("orderDetailsModal"));
+  modal.show();
+}
+
+
+      loadDataAndRender();
+
+		
+function printOrderDetails() {
+        const content = document.getElementById("details_order").innerHTML;
+
+        const printWindow = window.open("", "_blank");
+        printWindow.document.write(`
+    <html>
+      <head>
+        <title>طباعة تفاصيل الطلب</title>
+        <style>
+          body { font-family: Tahoma, Arial; direction: rtl; padding: 20px; }
+          h5, h6 { margin-bottom: 10px; }
+          p { margin: 5px 0; }
+          ul { list-style: none; padding: 0; }
+          li { margin-bottom: 5px; border-bottom: 1px solid #ddd; padding: 5px 0; }
+        </style>
+      </head>
+      <body>
+        ${content}
+      </body>
+    </html>
+  `);
+        printWindow.document.close();
+        printWindow.print();
+      }
+      function getOrders(EC_Order_StatusID) {
+        var fromDate = $("#fromDate").val();
+        var toDate = $("#toDate").val();
+
+        $.post(
+          "../../api/v1/data",
+          {
+            name: "track_order",
+            parameters: JSON.stringify([
+              { name: "@date1", value: fromDate, type: "date" },
+              { name: "@date2", value: toDate, type: "date" },
+              {
+                name: "@EC_Order_Status",
+                value: EC_Order_StatusID,
+                type: "nvarchar",
+              },
+            ]),
+          },
+ function (data) {
+    console.log("Orders Response:", data);
+
+    // تأكد إن data Array
+    if (!data || !Array.isArray(data)) {
+        console.warn("⚠️ API مرجعش Array", data);
+        return;
+    }
+  $("#" + EC_Order_StatusID + "-orders").empty();
+data.forEach((d) => {
+  $("#" + EC_Order_StatusID + "-orders").append(`
+    <li class="list-group-item" data-order='${JSON.stringify(d)}'>
+      <div class="d-flex align-items-center justify-content-between gap-2">
+
+        <!-- رقم الطلب واسم العميل -->
+        <span style="cursor:pointer; color: #1d4ed8; flex:1;" onclick="showOrderDetails(this)">
+          #${d.Order_number} (${d.reciver_name || "بدون اسم"})
+        </span>
+
+        <!-- التاريخ -->
+        <small class="text-white wrap-text" style="font-size: 7px;">
+          ${new Date(d.Order_date).toLocaleDateString("en-US")}
+        </small>
+
+        <!-- select يظهر بس لو مش تم الإلغاء -->
+        ${
+          d.internal_status_name !== "تم الالغاء"
+            ? `
+              <select class="form-select order-status-select" 
+                data-orderid="${d.ID}" 
+                style="width: auto; min-width: fit-content; padding: 2px 2px; font-size: 10px;">
+                <option value="">اختر الحالة</option>
+                ${statuses
+                  .map(
+                    (s) =>
+                      `<option value="${s.key}" ${
+                        s.key == EC_Order_StatusID ? "selected" : ""
+                      }>${s.label}</option>`
+                  )
+                  .join("")}
+              </select>
+            `
+            : ""
+        }
+      </div>
+    </li>
+  `);
+});
+
+
+}
+
+        );
+      }
+      $("#filterBtn").on("click", function () {
+        statuses.forEach((status) => {
+          getOrders(status.key);
+        });
+      });
+
+      // لما أضغط على زر "Move"
+      $(document).on("change", ".order-checkbox", function () {
+        const box = $(this).closest(".status-box");
+        const moveButton = box.find(".moveSelectedBtn");
+        const hasChecked = box.find(".order-checkbox:checked").length > 0;
+        $(moveButton).removeAttr("disabled"); // Enable if at least one checkbox is checked
+      });
+    // لما يغيّر المستخدم الحالة من select
+$(document).on("change", ".order-status-select", function () {
+    let orderId = $(this).attr("data-orderid");
+    let newStatus = $(this).val();
+    let currentStatus = $(this).closest("ul").attr("id").replace("-orders", "");
+
+    if (!newStatus || newStatus === currentStatus) return;
+
+    let worker = $("#workers").val();
+    let deliveries = $("#deliveries").val();
+
+    $.post(
+        "../../erp/procedq",
+        {
+            id:
+                "EC_Orders_Approve_save_track '" +
+                orderId +
+                "','" +
+                newStatus +
+                "','" +
+                (worker || "") +
+                "','" +
+                (deliveries || "") +
+                "','" +
+                getCookie("UserID") +
+                "','" +
+                getCookie("CompId") +
+                "'",
+        },
+        function (data) {
+            console.log("Change Status Response:", data);
+            if (data.length > 0 && data[0].hasOwnProperty("success")) {
+                getOrders(currentStatus);
+                getOrders(newStatus);
+            } else {
+                swal("حدث خطأ أثناء تحديث الحالة");
+            }
+        }
+    );
+});
+
+    </script>
+  </body>
+</html>

@@ -1,0 +1,106 @@
+/* pricing.css */
+.pricing-div {
+  width: 100%;
+  background: white;
+  padding: 3rem 0;
+}
+
+.pricing-list {
+  display: flex;
+  justify-content: space-around; /* توزيع متساوٍ */
+  align-items: stretch; /* جعل كل البطاقات بنفس الارتفاع */
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.pricing-card {
+  background: white;
+  border-radius: 12px;
+  padding: 0.1rem;
+  flex: 1; /* جعل البطاقات تتمدد لتملأ المساحة */
+  margin: 0 15px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  text-align: center;
+  position: relative;
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.pricing-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+}
+
+.pricing-card h3 {
+  font-size: 1.8rem;
+  color: #2c3e50;
+  margin-bottom: 1.2rem;
+  font-weight: 700;
+}
+
+.pricing-card p {
+  font-size: 2.8rem;
+  color: #3498db;
+  margin: 1.5rem 0;
+  font-weight: 800;
+}
+
+.pricing-card button {
+  background: #3498db;
+  color: white;
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 100%;
+  margin-top: auto; /* يدفع الزر للأسفل */
+}
+
+.pricing-card button:hover {
+  background: #2980b9;
+  transform: scale(1.02);
+}
+
+/* التأثيرات الزخرفية */
+.pricing-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 5px;
+  background: linear-gradient(90deg, #3498db 0%, #2ecc71 100%);
+}
+
+
+
+/* التصميم المتجاوب */
+@media (max-width: 992px) {
+  .pricing-list {
+    flex-wrap: wrap;
+  }
+  
+  .pricing-card {
+    flex: 1 1 45%;
+    margin-bottom: 30px;
+    min-height: 300px;
+  }
+}
+
+@media (max-width: 576px) {
+  .pricing-card {
+    flex: 1 1 100%;
+  }
+  
+  .pricing-div {
+    padding: 2rem 10px;
+  }
+}

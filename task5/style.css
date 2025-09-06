@@ -1,0 +1,301 @@
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            transition: background 0.3s, color 0.3s; 
+        }
+        header {
+            display: flex;
+            justify-content: space-between; 
+            align-items: center;
+            padding: 10px 40px;
+            background-color: #423f3f;
+            transition: background 0.3s;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center; 
+            gap: 10px; 
+        }
+
+        .logo {
+            height: 50px; 
+        }
+
+        .title {
+            font-size: 24px;
+            font-weight: bold;
+            color: #f2eeee;
+        }
+        span{
+            color:#e2ba42
+        }
+        
+       
+        body.light {
+            background: #ffffff;
+            color: #222222;
+        }
+
+        body.light header {
+            background-color: #423f3f;
+        }
+
+        body.light .hero {
+            background: #f5f5f5;
+        }
+
+        body.light .hero p {
+            color: #555;
+        }
+
+        body.light .card {
+            background: rgba(0, 0, 0, 0.05);
+        }
+
+      
+        body.dark {
+            background: #121212;
+            color: #f1f1f1;
+        }
+
+        body.dark header {
+            background-color: #2a2727;
+        }
+
+        body.dark .hero {
+            background: #1e1e1e;
+        }
+
+        body.dark .hero p {
+            color: #ccc;
+        }
+
+        body.dark .hero h1 {
+            color: #f1f1f1;
+        }
+
+        body.dark .card {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+       
+        #theme-toggle {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            background: #6a6966;
+            color: white;
+            font-weight: bold;
+            z-index: 1000;
+            transition: background 0.3s;
+        }
+
+        #theme-toggle:hover {
+            background: #e2ba42;
+        }
+
+        .hero {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 60px;
+            min-height: 70vh; 
+            transition: background 0.3s;
+        }
+
+        .hero-content {
+            flex: 1;
+            max-width: 50%;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            transition: color 0.3s;
+        }
+
+        .hero span {
+            color:#e2ba42;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            transition: color 0.3s;
+        }
+
+        .cta {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            background: #e2ba42;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .cta:hover {
+            background: #c9a437;
+        }
+
+        .hero-image {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+        }
+
+        .hero-image img {
+            width: 500px;
+            height: 500px;
+            border-radius: 50%; 
+            object-fit: cover; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: box-shadow 0.3s;
+        }
+
+        body.dark .hero-image img {
+            box-shadow: 0 4px 15px rgba(255,255,255,0.1);
+        }
+
+        
+        section {
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        
+        .card {
+            padding: 20px;
+            border-radius: 10px;
+            transition: background 0.3s, transform 0.3s;
+        }
+
+        
+        .features {
+            background: inherit; /* ياخد نفس لون الخلفية حسب الثيم */
+        }
+        .features h2 {
+            font-size: 2rem;
+            margin-bottom: 40px;
+        }
+        .features .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+        }
+        .features .card {
+            text-align: center;
+            padding: 30px 20px;
+        }
+        .features i {
+            font-size: 2rem;
+            color: #e2ba42;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+
+        .testimonials {
+            background: #686663;
+            color: white;
+            padding: 80px 20px;
+        }
+        .testimonials h2 {
+            font-size: 2rem;
+            margin-bottom: 30px;
+        }
+        .testimonials blockquote {
+            font-style: italic;
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        .testimonials cite {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+
+        .pricing h2 {
+            font-size: 2rem;
+            margin-bottom: 40px;
+        }
+        .pricing .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+        }
+        .pricing .card {
+            padding: 40px 20px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: inherit;
+        }
+        .pricing .card p {
+            font-size: 1rem;
+            font-weight: normal;
+            margin-top: 10px;
+        }
+        .pricing .card:hover {
+            transform: translateY(-8px);
+            background: #e3d198;
+            color: white;
+        }
+
+
+        .final-cta {
+            background: #423f3f;
+            color: white;
+            padding: 80px 20px;
+        }
+        .final-cta h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+        .final-cta .cta {
+            background: #e2ba42;
+            font-size: 18px;
+            padding: 14px 28px;
+        }
+
+        /* تحسينات للوضع الداكن */
+        body.dark .testimonials {
+            background: #4a4846;
+        }
+
+        body.dark .final-cta {
+            background: #2a2727;
+        }
+
+       
+        @media (max-width: 968px) {
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                padding: 40px 20px;
+            }
+            
+            .hero-content {
+                max-width: 100%;
+                margin-bottom: 40px;
+            }
+            
+            .hero-image img {
+                width: 300px;
+                height: 300px;
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+        }

@@ -1,0 +1,27 @@
+.posts-container {
+  display: flex;
+  flex-wrap: wrap; 
+  gap: 20px;      
+  justify-content: center;
+  padding: 20px;
+}
+.card {
+  width: 250px;  
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 10px;
+}
+.btn-design{
+ color:#339a68;
+ background-color: #f5f3f3;
+ border: 1px solid #339a68;
+ border-radius: 4px;
+ cursor: pointer;
+}
+.no-posts {
+  text-align: center;   
+  font-size: 1.5rem;    /* يكبر الخط */
+  color: #666;          /* لون رمادي هادي */
+  margin-top: 50px;     
+  font-weight: bold;    
+}

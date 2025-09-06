@@ -1,0 +1,12 @@
+.header-title{
+    font-size: 2rem;
+    font-weight: bold;
+    text-align: center;
+    margin: 1rem 0;
+    color:rgb(78, 70, 70)
+}
+header {
+    background:linear-gradient(to right, #b2d6c5,#45916c,#073b22);
+    padding: 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}

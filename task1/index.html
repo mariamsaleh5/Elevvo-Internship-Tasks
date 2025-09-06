@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>responsive sidebar</title>
+    <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+    <button id="sidebartoggle" class="toggle" aria-controls="sidebar" aria-expanded="false" aria-label="فتح وتنقل الشريط">
+        <svg width="24" height="24" viewBox="0 0 24 24" hidden="true">
+            <path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+    </button>
+  <aside id="sidebar" class="sidebar">
+    <div id="overlay" class="overlay" aria-hidden="true"></div>
+  <div class="logo">🍔 مطعم البرجر</div>
+  <nav>
+    <a href="#"><span>🍽</span> الأطباق الرئيسية</a>
+    <a href="#"><span>🥗</span> المقبلات</a>
+    <a href="#"><span>🔥</span> العروض</a>
+    <a href="#"><span>🥤</span> المشروبات</a>
+    <a href="#"><span>🍰</span> الحلويات</a>
+  </nav>
+</aside>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact Form</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f6f9;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+      padding: 20px;
+    }
+
+    form {
+      background: #fff;
+      padding: 20px 25px;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      width: 100%;
+      max-width: 450px;
+    }
+
+    h2 {
+    font-weight: 600px;
+      text-align: center;
+      margin-bottom: 20px;
+      color: #80557d;
+    font-family: 'Poppins', sans-serif; /* stylish for title */
+
+    }
+
+    label {
+      display: block;
+      margin: 10px 0 5px;
+      font-weight: bold;
+      font-size: 16px;
+      color: #874993;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 14px;
+      outline: none;
+      transition: border 0.2s;
+    }
+
+    input:focus, textarea:focus {
+      border-color: #8866a0;
+    }
+
+    button {
+      margin-top: 15px;
+      width: 100%;
+      padding: 12px;
+      background: #8247a4;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background: #4f354d;
+    }
+
+    .error {
+      color: red;
+      font-size: 13px;
+      margin-top: 3px;
+    }
+
+    /* Responsive */
+    @media (max-width: 500px) {
+      form {
+        padding: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <form id="contactForm">
+    <h2>Contact Us</h2>
+
+    <label for="fullName">Full Name</label>
+    <input type="text" id="fullName" name="fullName" placeholder="Enter your full name">
+    <div class="error" id="nameError"></div>
+
+    <label for="email">Email Address</label>
+    <input type="email" id="email" name="email" placeholder="Enter your email">
+    <div class="error" id="emailError"></div>
+
+    <label for="subject">Subject</label>
+    <input type="text" id="subject" name="subject" placeholder="Enter subject">
+    <div class="error" id="subjectError"></div>
+
+    <label for="message">Message</label>
+    <textarea id="message" name="message" placeholder="Write your message" rows="5"></textarea>
+    <div class="error" id="messageError"></div>
+
+    <button type="submit">Send Message</button>
+  </form>
+
+  <script>
+    document.getElementById('contactForm').addEventListener('submit', function(event) {
+      event.preventDefault(); // Stop form from submitting by default
+
+      // Get input values
+      let fullName = document.getElementById("fullName").value.trim();
+      let email = document.getElementById("email").value.trim();
+      let subject = document.getElementById("subject").value.trim();
+      let message = document.getElementById("message").value.trim();
+
+      // Error elements
+      let nameError = document.getElementById("nameError");
+      let emailError = document.getElementById("emailError");
+      let subjectError = document.getElementById("subjectError");
+      let messageError = document.getElementById("messageError");
+
+      // Clear errors
+      nameError.textContent = "";
+      emailError.textContent = "";
+      subjectError.textContent = "";
+      messageError.textContent = "";
+
+      let valid = true;
+
+      // Full name validation
+      if (fullName === "") {
+        nameError.textContent = "Full name is required.";
+        valid = false;
+      }
+
+      // Email validation (basic regex)
+      let emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+      if (email === "") {
+        emailError.textContent = "Email is required.";
+        valid = false;
+      } else if (!email.match(emailPattern)) {
+        emailError.textContent = "Please enter a valid email.";
+        valid = false;
+      }
+
+      // Subject validation
+      if (subject === "") {
+        subjectError.textContent = "Subject is required.";
+        valid = false;
+      }
+
+      // Message validation
+      if (message === "") {
+        messageError.textContent = "Message is required.";
+        valid = false;
+      }
+
+      // If valid → show success
+      if (valid) {
+        alert("Form submitted successfully!");
+        document.getElementById("contactForm").reset();
+      }
+    });
+  </script>
+</body>
+</html>
